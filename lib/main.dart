@@ -127,6 +127,10 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
   List<BudgetModel> _budgets = [];
   bool _isLocked = true;
 
+  // Search and Filter State
+  String _searchQuery = '';
+  String? _selectedCategoryFilter;
+
   @override
   void initState() {
     super.initState();
@@ -584,6 +588,10 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                     // Interactive Budgets Progress Bars
                     _buildBudgetsSection(l10n),
                     const SizedBox(height: 25),
+
+                    // Search & Filter for Transactions
+                    _buildSearchAndFilterSection(),
+                    const SizedBox(height: 15),
 
                     // Recent Transactions with AI categorization
                     _buildRecentTransactionsSection(l10n),
@@ -1356,7 +1364,103 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
     }
   }
 
+  Widget _buildSearchAndFilterSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Search Bar
+        _buildGlassCard(
+          child: TextField(
+            onChanged: (val) {
+              setState(() {
+                _searchQuery = val;
+              });
+            },
+            style: GoogleFonts.inter(color: AppColors.textPrimary),
+            decoration: InputDecoration(
+              hintText: 'Search transactions...',
+              hintStyle: GoogleFonts.inter(color: AppColors.textSecondary),
+              prefixIcon: const Icon(Icons.search, color: AppColors.textSecondary),
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        // Filter Chips
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: [
+              _buildFilterChip('All', null),
+              ..._categoryNameMap.entries.map((e) => _buildFilterChip(e.value, e.key)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFilterChip(String label, String? categoryId) {
+    final isSelected = _selectedCategoryFilter == categoryId;
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            _selectedCategoryFilter = categoryId;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: isSelected ? AppColors.emerald.withValues(alpha: 0.2) : AppColors.glassBackground,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: isSelected ? AppColors.emerald : AppColors.glassBorder,
+              width: 1,
+            ),
+          ),
+          child: Text(
+            label,
+            style: GoogleFonts.inter(
+              fontSize: 13,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color: isSelected ? AppColors.emerald : AppColors.textSecondary,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildRecentTransactionsSection(AppLocalizations l10n) {
+    // Apply filters
+    final filteredTransactions = _transactions.where((tx) {
+      final result = TransactionCategorizer.categorize(tx.rawDescription, tx.amount);
+      
+      // Category Filter
+      if (_selectedCategoryFilter != null) {
+        final expectedName = _categoryNameMap[_selectedCategoryFilter];
+        if (result.categoryName != expectedName) {
+          return false;
+        }
+      }
+
+      // Search Query
+      if (_searchQuery.isNotEmpty) {
+        final query = _searchQuery.toLowerCase();
+        final matchMerchant = result.cleanedMerchantName.toLowerCase().contains(query);
+        final matchRaw = tx.rawDescription.toLowerCase().contains(query);
+        if (!matchMerchant && !matchRaw) {
+          return false;
+        }
+      }
+
+      return true;
+    }).toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1370,20 +1474,20 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
           ),
         ),
         const SizedBox(height: 12),
-        if (_transactions.isEmpty)
+        if (filteredTransactions.isEmpty)
           _buildGlassCard(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Center(
                 child: Text(
-                  'No recent transactions.',
+                  'No transactions found.',
                   style: GoogleFonts.inter(fontSize: 13, color: AppColors.textSecondary),
                 ),
               ),
             ),
           )
         else
-          ..._transactions.map((tx) {
+          ...filteredTransactions.map((tx) {
             final result = TransactionCategorizer.categorize(tx.rawDescription, tx.amount);
             final isExpense = tx.amount < 0;
             
