@@ -261,6 +261,11 @@ class AppDatabase extends _$AppDatabase {
     return delete(transactions).go();
   }
 
+  // Delete a single transaction by ID
+  Future<int> deleteTransaction(String id) {
+    return (delete(transactions)..where((t) => t.id.equals(id))).go();
+  }
+
   // --- Budget helpers ---
 
   // Retrieve all budgets

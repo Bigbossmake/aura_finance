@@ -17,6 +17,7 @@ import 'core/db/app_database.dart';
 import 'package:drift/drift.dart' show Value;
 import 'features/budgets/domain/budget_model.dart';
 import 'features/budgets/presentation/add_budget_sheet.dart';
+import 'features/transactions/presentation/transaction_detail_sheet.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -443,6 +444,23 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
   void _deleteBudget(String budgetId) async {
     await AppDatabase.instance.deleteBudget(budgetId);
     _loadBudgets();
+  }
+
+  void _deleteTransaction(String transactionId) async {
+    await AppDatabase.instance.deleteTransaction(transactionId);
+    _loadAndPredictSubscriptions();
+  }
+
+  void _showTransactionDetail(TransactionModel tx) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => TransactionDetailSheet(
+        transaction: tx,
+        onDelete: () => _deleteTransaction(tx.id),
+      ),
+    );
   }
 
   @override
@@ -1371,7 +1389,9 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
             
             return Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
-              child: _buildGlassCard(
+              child: GestureDetector(
+                onTap: () => _showTransactionDetail(tx),
+                child: _buildGlassCard(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -1447,6 +1467,7 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
                     ],
                   ),
                 ),
+              ),
               ),
             );
           }),
