@@ -1,7 +1,10 @@
 import 'dart:ui';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
 import 'core/l10n/app_localizations.dart';
@@ -476,6 +479,46 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
   void _deleteTransaction(String transactionId) async {
     await AppDatabase.instance.deleteTransaction(transactionId);
     _loadAndPredictSubscriptions();
+  }
+
+  Future<void> _exportTransactionsToCSV() async {
+    if (_transactions.isEmpty) return;
+
+    try {
+      final directory = await getTemporaryDirectory();
+      final file = File('${directory.path}/aura_transactions.csv');
+
+      final buffer = StringBuffer();
+      // CSV Header
+      buffer.writeln('Date,Merchant,Amount,Currency,Category,AI Confidence');
+
+      // CSV Rows
+      for (var tx in _transactions) {
+        final result = TransactionCategorizer.categorize(tx.rawDescription, tx.amount);
+        // Escape commas in names
+        final merchant = result.cleanedMerchantName.replaceAll(',', '');
+        final date = '${tx.date.year}-${tx.date.month.toString().padLeft(2, '0')}-${tx.date.day.toString().padLeft(2, '0')}';
+        
+        buffer.writeln('$date,$merchant,${tx.amount},${tx.currency},${result.categoryName},${result.confidenceScore}');
+      }
+
+      await file.writeAsString(buffer.toString());
+      
+      if (mounted) {
+        final box = context.findRenderObject() as RenderBox?;
+        await Share.shareXFiles(
+          [XFile(file.path)],
+          text: 'Aura Finance - Transactions Export',
+          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to export CSV: $e')),
+        );
+      }
+    }
   }
 
   void _showTransactionDetail(TransactionModel tx) {
@@ -1487,14 +1530,25 @@ class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProv
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          l10n.recentTransactions.toUpperCase(),
-          style: GoogleFonts.outfit(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
-            color: AppColors.textSecondary,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              l10n.recentTransactions.toUpperCase(),
+              style: GoogleFonts.outfit(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.5,
+                color: AppColors.textSecondary,
+              ),
+            ),
+            if (_transactions.isNotEmpty)
+              IconButton(
+                onPressed: _exportTransactionsToCSV,
+                icon: const Icon(Icons.download, size: 20, color: AppColors.textSecondary),
+                tooltip: 'Export CSV',
+              ),
+          ],
         ),
         const SizedBox(height: 12),
         if (filteredTransactions.isEmpty)
