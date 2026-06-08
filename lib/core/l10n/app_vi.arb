@@ -1,0 +1,14 @@
+{
+  "@@locale": "vi",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Chào mừng đến với Aura Finance",
+  "onboardingAutomated": "Tự động theo dõi chi tiêu hàng ngày của bạn.",
+  "onboardingAISecure": "Phân loại bằng AI với bảo mật cấp ngân hàng.",
+  "netWorth": "Giá trị tài sản ròng",
+  "recentTransactions": "Giao dịch gần đây",
+  "subscriptions": "Khoản đăng ký",
+  "budgets": "Ngân sách",
+  "addTransaction": "Thêm giao dịch",
+  "settings": "Cài đặt",
+  "syncing": "Đang đồng bộ giao dịch..."
+}

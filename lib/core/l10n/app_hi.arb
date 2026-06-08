@@ -1,0 +1,14 @@
+{
+  "@@locale": "hi",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Aura Finance में आपका स्वागत है",
+  "onboardingAutomated": "आपके दैनिक खर्चों की स्वचालित ट्रैकिंग।",
+  "onboardingAISecure": "बैंकिंग-ग्रेड सुरक्षा के साथ AI-संचालित श्रेणियां।",
+  "netWorth": "कुल संपत्ति",
+  "recentTransactions": "हाल के लेनदेन",
+  "subscriptions": "सदस्यता",
+  "budgets": "बजट",
+  "addTransaction": "लेनदेन जोड़ें",
+  "settings": "सेटिंग्स",
+  "syncing": "लेनदेन सिंक हो रहे हैं..."
+}

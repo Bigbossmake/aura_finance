@@ -1,0 +1,14 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Aura Finance'a Hoş Geldiniz",
+  "onboardingAutomated": "Günlük harcamalarınızın otomatik takibi.",
+  "onboardingAISecure": "Banka düzeyinde güvenlikli yapay zeka kategorileri.",
+  "netWorth": "Net Değer",
+  "recentTransactions": "Son İşlemler",
+  "subscriptions": "Abonelikler",
+  "budgets": "Bütçeler",
+  "addTransaction": "İşlem Ekle",
+  "settings": "Ayarlar",
+  "syncing": "İşlemler senkronize ediliyor..."
+}

@@ -1,0 +1,14 @@
+{
+  "@@locale": "zh",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "欢迎使用 Aura Finance",
+  "onboardingAutomated": "自动追踪您的日常支出。",
+  "onboardingAISecure": "具备银行级安全性的 AI 智能分类。",
+  "netWorth": "净资产",
+  "recentTransactions": "最近交易",
+  "subscriptions": "订阅管理",
+  "budgets": "预算管理",
+  "addTransaction": "添加交易",
+  "settings": "设置",
+  "syncing": "正在同步交易..."
+}

@@ -1,0 +1,14 @@
+{
+  "@@locale": "nl",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Welkom bij Aura Finance",
+  "onboardingAutomated": "Automatische tracking van uw dagelijkse uitgaven.",
+  "onboardingAISecure": "AI-gestuurde categorieën met bankbeveiliging.",
+  "netWorth": "Nettowaarde",
+  "recentTransactions": "Recente transacties",
+  "subscriptions": "Abonnementen",
+  "budgets": "Budgetten",
+  "addTransaction": "Transactie toevoegen",
+  "settings": "Instellingen",
+  "syncing": "Transacties synchroniseren..."
+}

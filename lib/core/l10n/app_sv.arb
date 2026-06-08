@@ -1,0 +1,14 @@
+{
+  "@@locale": "sv",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Välkommen till Aura Finance",
+  "onboardingAutomated": "Automatisk spårning av dina dagliga utgifter.",
+  "onboardingAISecure": "AI-kategorisering med säkerhet i bankklass.",
+  "netWorth": "Nettovärde",
+  "recentTransactions": "Senaste transaktioner",
+  "subscriptions": "Prenumerationer",
+  "budgets": "Budgetar",
+  "addTransaction": "Lägg till transaktion",
+  "settings": "Inställningar",
+  "syncing": "Synkroniserar transaktioner..."
+}

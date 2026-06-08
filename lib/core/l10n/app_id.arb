@@ -1,0 +1,14 @@
+{
+  "@@locale": "id",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Selamat Datang di Aura Finance",
+  "onboardingAutomated": "Pelacakan otomatis pengeluaran harian Anda.",
+  "onboardingAISecure": "Kategori berbasis AI dengan keamanan tingkat bank.",
+  "netWorth": "Kekayaan Bersih",
+  "recentTransactions": "Transaksi Terakhir",
+  "subscriptions": "Langganan",
+  "budgets": "Anggaran",
+  "addTransaction": "Tambah Transaksi",
+  "settings": "Pengaturan",
+  "syncing": "Menyinkronkan transaksi..."
+}

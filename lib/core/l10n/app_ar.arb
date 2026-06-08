@@ -1,0 +1,14 @@
+{
+  "@@locale": "ar",
+  "appTitle": "أورا فاينانس",
+  "onboardingWelcome": "مرحباً بك في أورا فاينانس",
+  "onboardingAutomated": "تتبع تلقائي لمصروفاتك اليومية.",
+  "onboardingAISecure": "تصنيفات مدعومة بالذكاء الاصطناعي مع أمان بنكي.",
+  "netWorth": "صافي الثروة",
+  "recentTransactions": "المعاملات الأخيرة",
+  "subscriptions": "الاشتراكات",
+  "budgets": "الميزانيات",
+  "addTransaction": "إضافة معاملة",
+  "settings": "الإعدادات",
+  "syncing": "جاري مزامنة المعاملات..."
+}

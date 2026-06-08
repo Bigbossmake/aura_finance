@@ -1,0 +1,297 @@
+import os
+import json
+
+# Ensure target directory exists
+target_dir = os.path.join("lib", "core", "l10n")
+os.makedirs(target_dir, exist_ok=True)
+
+# 20 Languages with localized keys
+localizations = {
+    "en": {
+        "@@locale": "en",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Welcome to Aura Finance",
+        "onboardingAutomated": "Automated tracking of your daily spending.",
+        "onboardingAISecure": "AI-Driven categories with banking-grade security.",
+        "netWorth": "Net Worth",
+        "recentTransactions": "Recent Transactions",
+        "subscriptions": "Subscriptions",
+        "budgets": "Budgets",
+        "addTransaction": "Add Transaction",
+        "settings": "Settings",
+        "syncing": "Syncing transactions..."
+    },
+    "ru": {
+        "@@locale": "ru",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Добро пожаловать в Aura Finance",
+        "onboardingAutomated": "Автоматическое отслеживание ежедневных расходов.",
+        "onboardingAISecure": "AI-категоризация и безопасность банковского уровня.",
+        "netWorth": "Чистые активы",
+        "recentTransactions": "Последние транзакции",
+        "subscriptions": "Подписки",
+        "budgets": "Бюджеты",
+        "addTransaction": "Добавить транзакцию",
+        "settings": "Настройки",
+        "syncing": "Синхронизация транзакций..."
+    },
+    "es": {
+        "@@locale": "es",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Bienvenido a Aura Finance",
+        "onboardingAutomated": "Seguimiento automático de sus gastos diarios.",
+        "onboardingAISecure": "Categorías impulsadas por IA con seguridad bancaria.",
+        "netWorth": "Patrimonio neto",
+        "recentTransactions": "Transacciones recientes",
+        "subscriptions": "Suscripciones",
+        "budgets": "Presupuestos",
+        "addTransaction": "Agregar transacción",
+        "settings": "Configuración",
+        "syncing": "Sincronizando transacciones..."
+    },
+    "fr": {
+        "@@locale": "fr",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Bienvenue sur Aura Finance",
+        "onboardingAutomated": "Suivi automatique de vos dépenses quotidiennes.",
+        "onboardingAISecure": "Catégories gérées par IA avec sécurité bancaire.",
+        "netWorth": "Patrimoine net",
+        "recentTransactions": "Transactions récentes",
+        "subscriptions": "Abonnements",
+        "budgets": "Budgets",
+        "addTransaction": "Ajouter transaction",
+        "settings": "Paramètres",
+        "syncing": "Synchronisation des transactions..."
+    },
+    "de": {
+        "@@locale": "de",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Willkommen bei Aura Finance",
+        "onboardingAutomated": "Automatische Verfolgung Ihrer täglichen Ausgaben.",
+        "onboardingAISecure": "KI-gestützte Kategorien mit Bankensicherheit.",
+        "netWorth": "Nettovermögen",
+        "recentTransactions": "Kürzliche Transaktionen",
+        "subscriptions": "Abonnements",
+        "budgets": "Budgets",
+        "addTransaction": "Transaktion hinzufügen",
+        "settings": "Einstellungen",
+        "syncing": "Transaktionen werden synchronisiert..."
+    },
+    "it": {
+        "@@locale": "it",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Benvenuto in Aura Finance",
+        "onboardingAutomated": "Monitoraggio automatico delle spese quotidiane.",
+        "onboardingAISecure": "Categorie basate su IA con sicurezza bancaria.",
+        "netWorth": "Patrimonio netto",
+        "recentTransactions": "Transazioni recenti",
+        "subscriptions": "Abbonamenti",
+        "budgets": "Budget",
+        "addTransaction": "Aggiungi transazione",
+        "settings": "Impostazioni",
+        "syncing": "Sincronizzazione transazioni..."
+    },
+    "pt": {
+        "@@locale": "pt",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Bem-vindo ao Aura Finance",
+        "onboardingAutomated": "Rastreamento automático dos seus gastos diários.",
+        "onboardingAISecure": "Categorias orientadas por IA com segurança bancária.",
+        "netWorth": "Patrimônio líquido",
+        "recentTransactions": "Transações recentes",
+        "subscriptions": "Assinaturas",
+        "budgets": "Orçamentos",
+        "addTransaction": "Adicionar transação",
+        "settings": "Configurações",
+        "syncing": "Sincronizando transações..."
+    },
+    "zh": {
+        "@@locale": "zh",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "欢迎使用 Aura Finance",
+        "onboardingAutomated": "自动追踪您的日常支出。",
+        "onboardingAISecure": "具备银行级安全性的 AI 智能分类。",
+        "netWorth": "净资产",
+        "recentTransactions": "最近交易",
+        "subscriptions": "订阅管理",
+        "budgets": "预算管理",
+        "addTransaction": "添加交易",
+        "settings": "设置",
+        "syncing": "正在同步交易..."
+    },
+    "ja": {
+        "@@locale": "ja",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Aura Finance へようこそ",
+        "onboardingAutomated": "毎日の支出を自動的に追跡します。",
+        "onboardingAISecure": "銀行レベルのセキュリティを備えたAIカテゴリ分類。",
+        "netWorth": "純資産",
+        "recentTransactions": "最近の取引",
+        "subscriptions": "サブスクリプション",
+        "budgets": "予算",
+        "addTransaction": "取引を追加",
+        "settings": "設定",
+        "syncing": "取引を同期中..."
+    },
+    "ko": {
+        "@@locale": "ko",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Aura Finance에 오신 것을 환영합니다",
+        "onboardingAutomated": "일일 지출을 자동으로 추적합니다.",
+        "onboardingAISecure": "은행 수준의 보안을 적용한 AI 카테고리 분류.",
+        "netWorth": "순자산",
+        "recentTransactions": "최근 거래",
+        "subscriptions": "구독 목록",
+        "budgets": "예산",
+        "addTransaction": "거래 추가",
+        "settings": "설정",
+        "syncing": "거래 동기화 중..."
+    },
+    "ar": {
+        "@@locale": "ar",
+        "appTitle": "أورا فاينانس",
+        "onboardingWelcome": "مرحباً بك في أورا فاينانس",
+        "onboardingAutomated": "تتبع تلقائي لمصروفاتك اليومية.",
+        "onboardingAISecure": "تصنيفات مدعومة بالذكاء الاصطناعي مع أمان بنكي.",
+        "netWorth": "صافي الثروة",
+        "recentTransactions": "المعاملات الأخيرة",
+        "subscriptions": "الاشتراكات",
+        "budgets": "الميزانيات",
+        "addTransaction": "إضافة معاملة",
+        "settings": "الإعدادات",
+        "syncing": "جاري مزامنة المعاملات..."
+    },
+    "hi": {
+        "@@locale": "hi",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Aura Finance में आपका स्वागत है",
+        "onboardingAutomated": "आपके दैनिक खर्चों की स्वचालित ट्रैकिंग।",
+        "onboardingAISecure": "बैंकिंग-ग्रेड सुरक्षा के साथ AI-संचालित श्रेणियां।",
+        "netWorth": "कुल संपत्ति",
+        "recentTransactions": "हाल के लेनदेन",
+        "subscriptions": "सदस्यता",
+        "budgets": "बजट",
+        "addTransaction": "लेनदेन जोड़ें",
+        "settings": "सेटिंग्स",
+        "syncing": "लेनदेन सिंक हो रहे हैं..."
+    },
+    "tr": {
+        "@@locale": "tr",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Aura Finance'a Hoş Geldiniz",
+        "onboardingAutomated": "Günlük harcamalarınızın otomatik takibi.",
+        "onboardingAISecure": "Banka düzeyinde güvenlikli yapay zeka kategorileri.",
+        "netWorth": "Net Değer",
+        "recentTransactions": "Son İşlemler",
+        "subscriptions": "Abonelikler",
+        "budgets": "Bütçeler",
+        "addTransaction": "İşlem Ekle",
+        "settings": "Ayarlar",
+        "syncing": "İşlemler senkronize ediliyor..."
+    },
+    "nl": {
+        "@@locale": "nl",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Welkom bij Aura Finance",
+        "onboardingAutomated": "Automatische tracking van uw dagelijkse uitgaven.",
+        "onboardingAISecure": "AI-gestuurde categorieën met bankbeveiliging.",
+        "netWorth": "Nettowaarde",
+        "recentTransactions": "Recente transacties",
+        "subscriptions": "Abonnementen",
+        "budgets": "Budgetten",
+        "addTransaction": "Transactie toevoegen",
+        "settings": "Instellingen",
+        "syncing": "Transacties synchroniseren..."
+    },
+    "pl": {
+        "@@locale": "pl",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Witaj w Aura Finance",
+        "onboardingAutomated": "Automatyczne śledzenie codziennych wydatków.",
+        "onboardingAISecure": "Kategorie oparte na AI z zabezpieczeniami bankowymi.",
+        "netWorth": "Majątek netto",
+        "recentTransactions": "Ostatnie transakcje",
+        "subscriptions": "Subskrypcje",
+        "budgets": "Budżety",
+        "addTransaction": "Dodaj transakcję",
+        "settings": "Ustawienia",
+        "syncing": "Synchronizacja transakcji..."
+    },
+    "uk": {
+        "@@locale": "uk",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Ласкаво просимо до Aura Finance",
+        "onboardingAutomated": "Автоматичне відстеження щоденних витрат.",
+        "onboardingAISecure": "Категорії на базі AI з банківською безпекою.",
+        "netWorth": "Чисті активи",
+        "recentTransactions": "Останні транзакції",
+        "subscriptions": "Підписки",
+        "budgets": "Бюджети",
+        "addTransaction": "Додати транзакцію",
+        "settings": "Налаштування",
+        "syncing": "Синхронізація транзакцій..."
+    },
+    "vi": {
+        "@@locale": "vi",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Chào mừng đến với Aura Finance",
+        "onboardingAutomated": "Tự động theo dõi chi tiêu hàng ngày của bạn.",
+        "onboardingAISecure": "Phân loại bằng AI với bảo mật cấp ngân hàng.",
+        "netWorth": "Giá trị tài sản ròng",
+        "recentTransactions": "Giao dịch gần đây",
+        "subscriptions": "Khoản đăng ký",
+        "budgets": "Ngân sách",
+        "addTransaction": "Thêm giao dịch",
+        "settings": "Cài đặt",
+        "syncing": "Đang đồng bộ giao dịch..."
+    },
+    "id": {
+        "@@locale": "id",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Selamat Datang di Aura Finance",
+        "onboardingAutomated": "Pelacakan otomatis pengeluaran harian Anda.",
+        "onboardingAISecure": "Kategori berbasis AI dengan keamanan tingkat bank.",
+        "netWorth": "Kekayaan Bersih",
+        "recentTransactions": "Transaksi Terakhir",
+        "subscriptions": "Langganan",
+        "budgets": "Anggaran",
+        "addTransaction": "Tambah Transaksi",
+        "settings": "Pengaturan",
+        "syncing": "Menyinkronkan transaksi..."
+    },
+    "th": {
+        "@@locale": "th",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "ยินดีต้อนรับสู่ Aura Finance",
+        "onboardingAutomated": "ติดตามรายจ่ายประจำวันของคุณโดยอัตโนมัติ",
+        "onboardingAISecure": "จัดหมวดหมู่ด้วย AI พร้อมความปลอดภัยระดับธนาคาร",
+        "netWorth": "สินทรัพย์สุทธิ",
+        "recentTransactions": "รายการล่าสุด",
+        "subscriptions": "การเป็นสมาชิก",
+        "budgets": "งบประมาณ",
+        "addTransaction": "เพิ่มรายการ",
+        "settings": "ตั้งค่า",
+        "syncing": "กำลังซิงค์รายการ..."
+    },
+    "sv": {
+        "@@locale": "sv",
+        "appTitle": "Aura Finance",
+        "onboardingWelcome": "Välkommen till Aura Finance",
+        "onboardingAutomated": "Automatisk spårning av dina dagliga utgifter.",
+        "onboardingAISecure": "AI-kategorisering med säkerhet i bankklass.",
+        "netWorth": "Nettovärde",
+        "recentTransactions": "Senaste transaktioner",
+        "subscriptions": "Prenumerationer",
+        "budgets": "Budgetar",
+        "addTransaction": "Lägg till transaktion",
+        "settings": "Inställningar",
+        "syncing": "Synkroniserar transaktioner..."
+    }
+}
+
+for lang, data in localizations.items():
+    file_path = os.path.join(target_dir, f"app_{lang}.arb")
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+print(f"Successfully generated 20 translation files in {target_dir}!")

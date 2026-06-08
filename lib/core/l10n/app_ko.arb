@@ -1,0 +1,14 @@
+{
+  "@@locale": "ko",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Aura Finance에 오신 것을 환영합니다",
+  "onboardingAutomated": "일일 지출을 자동으로 추적합니다.",
+  "onboardingAISecure": "은행 수준의 보안을 적용한 AI 카테고리 분류.",
+  "netWorth": "순자산",
+  "recentTransactions": "최근 거래",
+  "subscriptions": "구독 목록",
+  "budgets": "예산",
+  "addTransaction": "거래 추가",
+  "settings": "설정",
+  "syncing": "거래 동기화 중..."
+}

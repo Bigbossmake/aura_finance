@@ -1,0 +1,14 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Добро пожаловать в Aura Finance",
+  "onboardingAutomated": "Автоматическое отслеживание ежедневных расходов.",
+  "onboardingAISecure": "AI-категоризация и безопасность банковского уровня.",
+  "netWorth": "Чистые активы",
+  "recentTransactions": "Последние транзакции",
+  "subscriptions": "Подписки",
+  "budgets": "Бюджеты",
+  "addTransaction": "Добавить транзакцию",
+  "settings": "Настройки",
+  "syncing": "Синхронизация транзакций..."
+}

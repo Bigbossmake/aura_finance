@@ -1,0 +1,14 @@
+{
+  "@@locale": "th",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "ยินดีต้อนรับสู่ Aura Finance",
+  "onboardingAutomated": "ติดตามรายจ่ายประจำวันของคุณโดยอัตโนมัติ",
+  "onboardingAISecure": "จัดหมวดหมู่ด้วย AI พร้อมความปลอดภัยระดับธนาคาร",
+  "netWorth": "สินทรัพย์สุทธิ",
+  "recentTransactions": "รายการล่าสุด",
+  "subscriptions": "การเป็นสมาชิก",
+  "budgets": "งบประมาณ",
+  "addTransaction": "เพิ่มรายการ",
+  "settings": "ตั้งค่า",
+  "syncing": "กำลังซิงค์รายการ..."
+}

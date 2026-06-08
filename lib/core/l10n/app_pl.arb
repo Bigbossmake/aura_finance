@@ -1,0 +1,14 @@
+{
+  "@@locale": "pl",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Witaj w Aura Finance",
+  "onboardingAutomated": "Automatyczne śledzenie codziennych wydatków.",
+  "onboardingAISecure": "Kategorie oparte na AI z zabezpieczeniami bankowymi.",
+  "netWorth": "Majątek netto",
+  "recentTransactions": "Ostatnie transakcje",
+  "subscriptions": "Subskrypcje",
+  "budgets": "Budżety",
+  "addTransaction": "Dodaj transakcję",
+  "settings": "Ustawienia",
+  "syncing": "Synchronizacja transakcji..."
+}

@@ -1,0 +1,14 @@
+{
+  "@@locale": "ja",
+  "appTitle": "Aura Finance",
+  "onboardingWelcome": "Aura Finance へようこそ",
+  "onboardingAutomated": "毎日の支出を自動的に追跡します。",
+  "onboardingAISecure": "銀行レベルのセキュリティを備えたAIカテゴリ分類。",
+  "netWorth": "純資産",
+  "recentTransactions": "最近の取引",
+  "subscriptions": "サブスクリプション",
+  "budgets": "予算",
+  "addTransaction": "取引を追加",
+  "settings": "設定",
+  "syncing": "取引を同期中..."
+}
