@@ -15,6 +15,8 @@ import 'features/subscriptions/presentation/subscriptions_screen.dart';
 import 'features/transactions/presentation/add_transaction_sheet.dart';
 import 'core/db/app_database.dart';
 import 'package:drift/drift.dart' show Value;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'features/onboarding/presentation/onboarding_screen.dart';
 import 'features/budgets/domain/budget_model.dart';
 import 'features/budgets/presentation/add_budget_sheet.dart';
 import 'features/transactions/presentation/transaction_detail_sheet.dart';
@@ -23,11 +25,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.init();
   await NotificationService.requestPermissions();
-  runApp(const MyApp());
+
+  final prefs = await SharedPreferences.getInstance();
+  final hasCompletedOnboarding = prefs.getBool('has_completed_onboarding') ?? false;
+
+  runApp(MyApp(initialOnboardingCompleted: hasCompletedOnboarding));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool initialOnboardingCompleted;
+
+  const MyApp({super.key, required this.initialOnboardingCompleted});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -35,10 +43,23 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('en');
+  late bool _hasCompletedOnboarding;
+
+  @override
+  void initState() {
+    super.initState();
+    _hasCompletedOnboarding = widget.initialOnboardingCompleted;
+  }
 
   void setLocale(Locale locale) {
     setState(() {
       _locale = locale;
+    });
+  }
+
+  void _completeOnboarding() {
+    setState(() {
+      _hasCompletedOnboarding = true;
     });
   }
 
@@ -77,7 +98,9 @@ class _MyAppState extends State<MyApp> {
         Locale('th'),
         Locale('sv'),
       ],
-      home: DashboardScreen(onLocaleChange: setLocale, currentLocale: _locale),
+      home: _hasCompletedOnboarding 
+          ? DashboardScreen(onLocaleChange: setLocale, currentLocale: _locale)
+          : OnboardingScreen(onComplete: _completeOnboarding),
     );
   }
 }
